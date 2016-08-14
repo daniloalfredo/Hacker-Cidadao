@@ -1,1 +1,1 @@
-INSERT INTO Cidade
+INSERT INTO Cidade(Name) VALUES('Recife');
