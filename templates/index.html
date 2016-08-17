@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <style>
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0;}
+      #map{ height: 100% }
+    </style>
+    <link rel="stylesheet" href="static/css/leaflet.css" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.ie.css" />
+<![endif]-->
+
+<script src="static/js/leaflet-src.js"></script>
+<script type="text/javascript" src="static/js/leaflet.ajax.js"></script>
+<script src="static/js/spin.js"></script>
+<script src="static/js/leaflet.spin.js"></script>
+
+    <title>OcuPark</title>
+    </head>
+    <body>
+    <div id="map"></div>
+
+      <script type="text/javascript">var m= L.map('map', {zoomControl: true}).setView([-8.063198, -34.871217], 13);
+
+var mopt = {
+    url: 'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3dtIiwiYSI6InFoYkpvS00ifQ.WHqQ_q865NKjIQB6Wpoi2w',
+    options: {attribution:'© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}
+  };
+var mq=L.tileLayer(mopt.url,mopt.options);
+
+mq.addTo(m);
+
+
+function popUp(f,l){
+    var out = [];
+    if (f.properties){
+        for(key in f.properties)
+        {   
+            out.push(key+": "+f.properties[key]);
+        }
+
+        l.bindPopup(out.join("<a href="+"/mapa"+" Conheça nossos eventos! </a>"+"<br />"));
+        
+        }
+
+
+}
+
+
+var jsonTest = new L.GeoJSON.AJAX(["static/geojson/foo.geojson"],{onEachFeature:popUp}).addTo(m);
+
+
+
+</script>
+
+
+    </body>
+</html>
